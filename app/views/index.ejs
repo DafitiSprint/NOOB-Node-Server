@@ -1,0 +1,11 @@
+<script>
+var socket = new WebSocket('ws://10.30.10.67:8083');
+socket.onopen = function(m) {
+    console.log('connected ', m);
+}
+socket.onmessage = function(m) {
+    console.log('message:', m);
+}
+</script>
+<a href='/alert' target='_blank'>alert!</a>
+<%= title %>

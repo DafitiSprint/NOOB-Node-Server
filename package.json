@@ -1,0 +1,14 @@
+{
+  "name": "webserver",
+  "author": "Luiz Guilherme <luizguilhermesj00@gmail.com",
+  "description": "NOOB server",
+  "version": "0.0.1",
+  "scripts": {
+    "start": "nodejs ./app/app.js"
+  },
+  "dependencies": {
+    "express": "~4.2.0",
+    "ws": "latest",
+    "ejs": "~0.8.5"
+  }
+}

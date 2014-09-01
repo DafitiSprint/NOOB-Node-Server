@@ -1,4 +1,4 @@
-NOOB-Node-Server
-================
+NOOB - Arduino
+====
 
-NOB Nodejs powered REST and WebSocket Server
+Instructions to compile and use arduino as a NOOB client
