@@ -1,11 +1,16 @@
-var app = require('express')()
+var express = require('express');
+var app = express();
 var path = require('path');
 var server = require('http').createServer(app);
 var WebSocketServer = require('ws').Server;
 var ws = new WebSocketServer({server: server});
 
+var bodyParser = require('body-parser');
+app.use(bodyParser.json());
+
 var IndexController = require('./controllers/index');
 var WebsocketController = require('./controllers/websocket');
+var NotifyController = require('./controllers/notify');
 
 server.listen(8083);
 
@@ -19,3 +24,4 @@ app.set('view engine', 'ejs');
 
 app.get('/', IndexController.index);
 app.get('/alert', IndexController.alert);
+app.post('/notify', NotifyController.notify);
