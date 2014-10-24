@@ -18,27 +18,27 @@ module.exports = {
         var observers = getObservers(parameters.type);
         var messages = createMessages(observers, parameters.type);
         console.log(messages);
-    	res.status(201).send();
+        res.status(201).send();
     }
 };
 
 function getObservers(type){
-	typeEntity = require("./../entities/type");
+    typeEntity = require("./../entities/type");
 
-	typeMapper = [];
+    typeMapper = [];
     typeMapper[typeEntity.TYPE_MESSAGE_ERROR] = ["web","tv"];
 
     return typeMapper[type];
 }
 
 function createMessages(observers, type){
-	var messages = [];
+    var messages = [];
 
     for (i = 0; i < observers.length; i++) {
-    	observer = observers[i];
-    	builder = require("./../builders/"+ observer);    	
-    	message = builder.build(type);        	
-    	messages[messages.length] = message;
+        observer = observers[i];
+        builder = require("./../builders/"+ observer);
+        message = builder.build(type);
+        messages[messages.length] = message;
     }
 
     return messages;
