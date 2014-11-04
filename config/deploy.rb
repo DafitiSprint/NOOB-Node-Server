@@ -5,9 +5,9 @@ set :application, 'NOOB-node-server'
 set :repo_url, 'https://github.com/DafitiSprint/NOOB-Node-Server.git'
 set :branch, 'master'
 
-set :ssh_options, {
-  port: 80
-}
+#set :ssh_options, {
+#  port: 80
+#}
 
 # Default branch is :master
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
