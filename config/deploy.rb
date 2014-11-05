@@ -5,7 +5,7 @@ set :application, 'NOOB-node-server'
 set :repo_url, 'https://github.com/DafitiSprint/NOOB-Node-Server.git'
 set :branch, 'master'
 
-set :npm_target_path, -> { release_path.join('subdir') } # default not set
+set :npm_target_path, -> { release_path } # default not set
 set :npm_flags, '--production --silent'           # default
 set :npm_roles, :all                              # default
 
@@ -44,16 +44,6 @@ set :deploy_to, '/app/node-server'
 # set :keep_releases, 5
 
 namespace :deploy do
-
-  desc 'Install dependencies'
-  task :install do
-    on roles(:app), in: :sequence do
-	  within fetch(:latest_release_directory) do
-	    # Your restart mechanism here, for example:
-	    execute "npm install"
-	  end
-    end
-  end
 
   desc 'Restart application'
   task :restart do
