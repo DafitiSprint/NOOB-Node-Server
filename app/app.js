@@ -12,7 +12,7 @@ var IndexController = require('./controllers/index');
 var WebsocketController = require('./controllers/websocket');
 var NotifyController = require('./controllers/notify');
 
-server.listen(8083);
+server.listen(80);
 
 ws.on('connection', WebsocketController.connection);
 ws.broadcast = WebsocketController.broadcast;
