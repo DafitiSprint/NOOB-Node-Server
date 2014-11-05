@@ -43,17 +43,21 @@ namespace :deploy do
 
   desc 'Install dependencies'
   task :restart do
-    on roles(:app), in: :sequence, within release_path do
-      # Your restart mechanism here, for example:
-      execute "npm install"
+    on roles(:app), in: :sequence do
+	  within fetch(:latest_release_directory) do
+	    # Your restart mechanism here, for example:
+	    execute "npm install"
+	  end
     end
   end
 
   desc 'Restart application'
   task :restart do
-    on roles(:app), in: :sequence, wait: 5, within release_path do
-      # Your restart mechanism here, for example:
-      execute "forever t app/app.js"
+    on roles(:app), in: :sequence, wait: 5 do
+	  within fetch(:latest_release_directory) do
+	    # Your restart mechanism here, for example:
+	    execute "forever t app/app.js"
+      end
     end
   end
 
