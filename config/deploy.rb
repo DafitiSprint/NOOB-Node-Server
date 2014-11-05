@@ -46,7 +46,7 @@ namespace :deploy do
     on roles(:app), in: :sequence do
 	  within fetch(:latest_release_directory) do
 	    # Your restart mechanism here, for example:
-	    execute "npm install"
+	    execute "sudo npm install"
 	  end
     end
   end
