@@ -46,7 +46,7 @@ set :deploy_to, '/app/node-server'
 namespace :deploy do
 
   desc 'Install dependencies'
-  task :installDeps do
+  task :install do
     on roles(:app), in: :sequence do
 	  within fetch(:latest_release_directory) do
 	    # Your restart mechanism here, for example:
