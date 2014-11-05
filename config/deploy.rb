@@ -41,11 +41,19 @@ set :deploy_to, '/app/node-server'
 
 namespace :deploy do
 
+  desc 'Install dependencies'
+  task :restart do
+    on roles(:app), in: :sequence, within release_path do
+      # Your restart mechanism here, for example:
+      execute "npm install"
+    end
+  end
+
   desc 'Restart application'
   task :restart do
-    on roles(:app), in: :sequence, wait: 5 do
+    on roles(:app), in: :sequence, wait: 5, within release_path do
       # Your restart mechanism here, for example:
-      execute "forever t /app/node-server/current/app/app.js"
+      execute "forever t app/app.js"
     end
   end
 
