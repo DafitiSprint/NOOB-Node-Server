@@ -6,7 +6,7 @@ set :repo_url, 'https://github.com/DafitiSprint/NOOB-Node-Server.git'
 set :branch, 'master'
 
 set :npm_target_path, -> { release_path } # default not set
-set :npm_flags, '--production --silent'           # default
+set :npm_flags, '--production'           # default
 set :npm_roles, :all                              # default
 
 #set :ssh_options, {
