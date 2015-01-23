@@ -1,4 +1,3 @@
-
 module.exports = {
     notify: function(req, res) {
 
@@ -20,7 +19,9 @@ module.exports = {
         console.log(messages);
         res.status(201).send();
     }
-};
+
+    //_getObservers
+}
 
 function getObservers(type){
     typeEntity = require("./../entities/type");

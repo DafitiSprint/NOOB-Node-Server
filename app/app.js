@@ -15,9 +15,9 @@ var NotifyController = require('./controllers/notify');
 server.listen(3000);
 
 ws.on('connection', WebsocketController.connection);
-ws.broadcast = WebsocketController.broadcast;
+ws.broadcast = WebsocketController.broadcastToDevice;
 app.set('ws', ws);
-
+global.ws = ws;
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -25,3 +25,5 @@ app.set('view engine', 'ejs');
 app.get('/', IndexController.index);
 app.get('/alert', IndexController.alert);
 app.post('/notify', NotifyController.notify);
+
+var browser = require('./builders/browser').init();

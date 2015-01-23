@@ -1,3 +1,5 @@
+var url = require('url');
+
 module.exports = {
 
     connection: function(ws) {
@@ -13,12 +15,24 @@ module.exports = {
         ws.on('close', function(message) {
             console.log('closed: %s', message);
         });
-        console.log('connected!');
+
+        ws.upgradeReq.client.type = url.parse(ws.upgradeReq.url, true).query['type'];
+        console.log(ws.upgradeReq.client.type + ' connected!');
     },
 
     broadcast: function(data) {
-        for(var i in this.clients)
-            this.clients[i].send(data);
+        this.clients.forEach(function(client) {
+            client.send(data);
+        });
+    },
+
+    broadcastToDevice: function (device, data) {
+        this.clients.forEach(function(client){
+            if (client.upgradeReq.client.type == device) {
+                console.log(data);
+                client.send(data);
+            }
+        })
     }
 
 };
