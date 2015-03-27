@@ -49,7 +49,7 @@ namespace :deploy do
 
   desc 'Restart application'
   task :restart do
-    on roles(:app), in: :sequence, wait: 5 do
+    on roles(:web), in: :sequence, wait: 5 do
       within fetch(:latest_release_directory) do
         # Your restart mechanism here, for example:
         execute "forever restart #{main_js}"
@@ -59,20 +59,20 @@ namespace :deploy do
 
 
   desc 'Start application'
-  task :restart do
-    on roles(:app), in: :sequence, wait: 5 do
+  task :start do
+    on roles(:web), in: :sequence, wait: 5 do
       within fetch(:latest_release_directory) do
-        # Your restart mechanism here, for example:
+        # Your start mechanism here, for example:
         execute "forever start #{main_js}"
       end
     end
   end
 
   desc 'Stop application'
-  task :restart do
-    on roles(:app), in: :sequence, wait: 5 do
+  task :stop do
+    on roles(:web), in: :sequence, wait: 5 do
       within fetch(:latest_release_directory) do
-        # Your restart mechanism here, for example:
+        # Your stop mechanism here, for example:
         execute "forever stop #{main_js}"
       end
     end
