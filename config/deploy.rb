@@ -47,17 +47,17 @@ set :deploy_to, '/app/node-server'
 namespace :deploy do
 
     desc "START the servers"
-        task :start, :roles => :app, :except => { :no_release => true } do
+    task :start, :roles => :app, :except => { :no_release => true } do
         run "cd #{deploy_to}/current/ && forever start #{main_js}"
     end
  
     desc "STOP the servers"
-        task :stop, :roles => :app, :except => { :no_release => true } do
+    task :stop, :roles => :app, :except => { :no_release => true } do
         run "cd #{deploy_to}/current/ && forever stop #{main_js}"
     end
  
     desc "RESTART the servers"
-        task :restart, :roles => :app, :except => { :no_release => true } do
+    task :restart, :roles => :app, :except => { :no_release => true } do
         run "cd #{deploy_to}/current/ && forever restart #{main_js}"
     end
 
