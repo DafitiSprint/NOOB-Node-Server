@@ -46,27 +46,37 @@ set :deploy_to, '/app/node-server'
 
 namespace :deploy do
 
-    desc "START the servers"
-    task :start, :roles => :app, :except => { :no_release => true } do
-        run "cd #{deploy_to}/current/ && forever start #{main_js}"
-    end
- 
-    desc "STOP the servers"
-    task :stop, :roles => :app, :except => { :no_release => true } do
-        run "cd #{deploy_to}/current/ && forever stop #{main_js}"
-    end
- 
-    desc "RESTART the servers"
-    task :restart, :roles => :app, :except => { :no_release => true } do
-        run "cd #{deploy_to}/current/ && forever restart #{main_js}"
-    end
 
-end
-task :tail do
-   resp = capture "cd #{deploy_to}/current/ && forever logs | grep #{main_js}"
-   log = resp.split(" ").last
-   log.gsub!("\e[35m", "")
-   log.gsub!("\e[39m", "")
-   run "tail -f #{log}"
+  desc 'Restart application'
+  task :restart do
+    on roles(:app), in: :sequence, wait: 5 do
+      within fetch(:latest_release_directory) do
+        # Your restart mechanism here, for example:
+        execute "forever restart #{main_js}"
+      end
+    end
+  end
+
+
+  desc 'Start application'
+  task :restart do
+    on roles(:app), in: :sequence, wait: 5 do
+      within fetch(:latest_release_directory) do
+        # Your restart mechanism here, for example:
+        execute "forever start #{main_js}"
+      end
+    end
+  end
+
+  desc 'Stop application'
+  task :restart do
+    on roles(:app), in: :sequence, wait: 5 do
+      within fetch(:latest_release_directory) do
+        # Your restart mechanism here, for example:
+        execute "forever stop #{main_js}"
+      end
+    end
+  end
+
 end
 
