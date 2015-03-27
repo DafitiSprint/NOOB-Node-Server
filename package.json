@@ -4,7 +4,7 @@
   "description": "NOOB server",
   "version": "0.0.1",
   "scripts": {
-    "start": "nodejs ./app/app.js"
+    "start": "forever start app/app.js"
   },
   "dependencies": {
     "express": "~4.2.0",

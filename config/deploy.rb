@@ -50,7 +50,7 @@ namespace :deploy do
     on roles(:app), in: :sequence, wait: 5 do
 	  within fetch(:latest_release_directory) do
 	    # Your restart mechanism here, for example:
-	    execute "forever t app/app.js"
+	    execute "forever restart app/app.js"
       end
     end
   end
