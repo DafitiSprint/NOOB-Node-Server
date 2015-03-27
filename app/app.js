@@ -25,5 +25,3 @@ app.set('view engine', 'ejs');
 app.get('/', IndexController.index);
 app.get('/alert', IndexController.alert);
 app.post('/notify', NotifyController.notify);
-
-var browser = require('./builders/browser').init();

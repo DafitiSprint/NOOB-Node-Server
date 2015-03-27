@@ -9,6 +9,7 @@ module.exports = {
 	},
 
 	onAlert: function(data) {
+        console.log('trying to send to browser');
 		global.ws.broadcast(device.BROWSER, {"text":'uhu','color':'red'});
 	}
 }

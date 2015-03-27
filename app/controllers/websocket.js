@@ -17,6 +17,8 @@ module.exports = {
         });
 
         ws.upgradeReq.client.type = url.parse(ws.upgradeReq.url, true).query['type'];
+        ws.upgradeReq.client.instance = require('../builders/browser');
+        ws.upgradeReq.client.instance.init();
         console.log(ws.upgradeReq.client.type + ' connected!');
     },
 
@@ -28,9 +30,9 @@ module.exports = {
 
     broadcastToDevice: function (device, data) {
         this.clients.forEach(function(client){
+                console.log('broadcast to ' + device);
             if (client.upgradeReq.client.type == device) {
-                console.log(data);
-                client.send(data);
+                client.send(JSON.stringify(data));
             }
         })
     }
