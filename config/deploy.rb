@@ -7,7 +7,8 @@ set :branch, 'master'
 
 set :npm_target_path, -> { release_path } # default not set
 set :npm_flags, '--production'           # default
-set :npm_roles, :all                              # default
+set :npm_roles, :all   
+set :main_js, "app/app.js"                           # default
 
 #set :ssh_options, {
 #  port: 80
@@ -54,6 +55,22 @@ namespace :deploy do
       end
     end
   end
+
+    desc "START the servers"
+        task :start, :roles => :app, :except => { :no_release => true } do
+        run "cd #{deploy_to}/current/ && forever start #{main_js}"
+    end
+ 
+    desc "STOP the servers"
+        task :stop, :roles => :app, :except => { :no_release => true } do
+        run "cd #{deploy_to}/current/ && forever stop #{main_js}"
+    end
+ 
+    desc "RESTART the servers"
+        task :restart, :roles => :app, :except => { :no_release => true } do
+        run "cd #{deploy_to}/current/ && forever restart #{main_js}"
+    end
+
 
 end
 
