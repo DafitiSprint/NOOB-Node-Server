@@ -44,39 +44,9 @@ set :deploy_to, '/app/node-server'
 # Default value for keep_releases is 5
 # set :keep_releases, 5
 
-namespace :deploy do
-
-
-  desc 'Restart application'
-  task :restart do
-    on roles(:web), in: :sequence, wait: 5 do
-      within fetch(:latest_release_directory) do
-        # Your restart mechanism here, for example:
-        execute "forever restart #{main_js}"
-      end
-    end
+desc 'Restart application'  
+task :restart do  
+  on roles(:web), in: :sequence, wait: 5 do
+    execute "forever start #{release_path.join('app/app.js')}"
   end
-
-
-  desc 'Start application'
-  task :start do
-    on roles(:web), in: :sequence, wait: 5 do
-      within fetch(:latest_release_directory) do
-        # Your start mechanism here, for example:
-        execute "forever start #{main_js}"
-      end
-    end
-  end
-
-  desc 'Stop application'
-  task :stop do
-    on roles(:web), in: :sequence, wait: 5 do
-      within fetch(:latest_release_directory) do
-        # Your stop mechanism here, for example:
-        execute "forever stop #{main_js}"
-      end
-    end
-  end
-
-end
-
+end 
