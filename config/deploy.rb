@@ -46,16 +46,6 @@ set :deploy_to, '/app/node-server'
 
 namespace :deploy do
 
-  desc 'Restart application'
-  task :restart do
-    on roles(:app), in: :sequence, wait: 5 do
-	  within fetch(:latest_release_directory) do
-	    # Your restart mechanism here, for example:
-	    execute "forever restart app/app.js"
-      end
-    end
-  end
-
     desc "START the servers"
         task :start, :roles => :app, :except => { :no_release => true } do
         run "cd #{deploy_to}/current/ && forever start #{main_js}"
@@ -70,7 +60,6 @@ namespace :deploy do
         task :restart, :roles => :app, :except => { :no_release => true } do
         run "cd #{deploy_to}/current/ && forever restart #{main_js}"
     end
-
 
 end
 task :tail do
