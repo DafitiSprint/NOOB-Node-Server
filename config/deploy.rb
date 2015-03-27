@@ -43,10 +43,21 @@ set :deploy_to, '/app/node-server'
 
 # Default value for keep_releases is 5
 # set :keep_releases, 5
-
-desc 'Restart application'  
-task :restart do  
-  on roles(:app), in: :sequence, wait: 5 do
-    execute "forever start #{release_path.join('app/app.js')}"
+namespace :deploy do
+  desc "Stop Forever"
+  task :stop do
+    run "forever stopall" 
   end
-end 
+ 
+  desc "Start Forever"
+  task :start do
+    run "cd #{current_path} && forever start app/app.js" 
+  end
+ 
+  desc "Restart Forever"
+  task :restart do
+    stop
+    sleep 5
+    start
+  end
+end
