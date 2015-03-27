@@ -4,6 +4,10 @@ lock '3.2.1'
 set :application, 'NOOB-node-server'
 set :repo_url, 'https://github.com/DafitiSprint/NOOB-Node-Server.git'
 set :branch, 'master'
+
+set :npm_target_path, -> { release_path } # default not set
+set :npm_flags, '--production'           # default
+set :npm_roles, :all   
 set :main_js, "app/app.js"                           # default
 
 #set :ssh_options, {
@@ -54,7 +58,7 @@ namespace :deploy do
     on roles(:app), in: :sequence, wait: 5 do
       # This assumes you are using upstart to startup your application 
       # - be sure that your upstart script runs as the 'deploy' user
-      execute "forever start #{deploy_to}/current/app/app.js", raise_on_non_zero_exit: false
+      execute "forever start #{deploy_to}/current/#{main_js}", raise_on_non_zero_exit: false
     end
   end
  
