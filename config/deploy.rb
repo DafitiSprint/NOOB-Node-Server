@@ -46,7 +46,7 @@ set :deploy_to, '/app/node-server'
 
 desc 'Restart application'  
 task :restart do  
-  on roles(:web), in: :sequence, wait: 5 do
+  on roles(:all), in: :sequence, wait: 5 do
     execute "forever start #{release_path.join('app/app.js')}"
   end
 end 
