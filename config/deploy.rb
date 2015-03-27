@@ -73,4 +73,11 @@ namespace :deploy do
 
 
 end
+task :tail do
+   resp = capture "cd #{deploy_to}/current/ && forever logs | grep #{main_js}"
+   log = resp.split(" ").last
+   log.gsub!("\e[35m", "")
+   log.gsub!("\e[39m", "")
+   run "tail -f #{log}"
+end
 
