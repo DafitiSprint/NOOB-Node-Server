@@ -1,3 +1,5 @@
+var mediator = require('../components/mediator');
+var event = require('../entities/event');
 
 module.exports = {
     index: function(req, res) {
@@ -5,8 +7,7 @@ module.exports = {
     },
 
     alert: function(req, res) {
-        var ws = req.app.get('ws');
-        ws.broadcast('apitaaa!!!');
+        mediator.publish(event.ALERT);
         res.render('alert', { message: 'Alert sent to all clients' });  
     }
 };

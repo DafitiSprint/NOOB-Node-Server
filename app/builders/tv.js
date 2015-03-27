@@ -1,12 +1,12 @@
-var type = require("./../entities/type");
+module.exports = {
+	OBSERVER_TYPE: "tv",
 
-var OBSERVER_TYPE                     = "tv";
+	messages: {
+		type.TYPE_MESSAGE_ERROR = "Mensagem de erro para tv",
+		type.TYPE_MESSAGE_INFO = ""
+	},
 
-var messages                          = [];
-messages[type.TYPE_MESSAGE_ERROR]     = "Mensagem de erro para tv";
-messages[type.TYPE_MESSAGE_INFO]      = "";
-
-this.build = function(typeMessage) {
-    messageModule = require('./../entities/message');
-    return messageModule.create(messages[typeMessage], OBSERVER_TYPE);
+	build: function(typeMessage) {
+	    return messageModule.create(messages.typeMessage, OBSERVER_TYPE);
+	}
 }
