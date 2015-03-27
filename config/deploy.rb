@@ -44,20 +44,22 @@ set :deploy_to, '/app/node-server'
 # Default value for keep_releases is 5
 # set :keep_releases, 5
 namespace :deploy do
+ 
+  #TODO: Add stop task in upstart
   desc "Stop Forever"
-  task :stop do
-    run "forever stopall" 
+  task :started do
+    on roles(:app) do
+      execute "forever stopall" 
+    end
   end
  
-  desc "Start Forever"
-  task :start do
-    run "cd #{current_path} && forever start app/app.js" 
-  end
- 
-  desc "Restart Forever"
+  desc 'Restart application'
   task :restart do
-    stop
-    sleep 5
-    start
+    on roles(:app), in: :sequence, wait: 5 do
+      # This assumes you are using upstart to startup your application 
+      # - be sure that your upstart script runs as the 'deploy' user
+      execute "sudo start app/app.js", raise_on_non_zero_exit: false
+    end
   end
+ 
 end
